@@ -1,13 +1,14 @@
-package com.project.Property_Details.Service;
+package com.project.Services;
 
-import java.util.List;
+import java.util.List; 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.project.Property_Details.Model.PropModel;
-import com.project.Property_Details.Repository.PropRepository;
-import com.project.UserHistory.Model.HistoryModel;
+import com.project.Models.PropModel;
+import com.project.Repositories.PropRepository;
 
 @Service
 public class PropService {
@@ -24,9 +25,6 @@ public class PropService {
 		Optional<PropModel> propOptional = pr.findById(id);
         return propOptional.orElse(null);
 	}
-	public List<PropModel> getPropertyByOwnerId(int id) {
-        return pr.findAllByOwnerId(id);
-    }
 	
 	public String changeinfobyid(int id,PropModel um)
 	{
@@ -52,5 +50,13 @@ public class PropService {
 		{
 			return "Enter Valid Id";
 		}
+	}
+	
+	public List<PropModel> getPages(int pno, int psize, String field)
+	{
+		Sort ord = Sort.by(Sort.DEFAULT_DIRECTION,field);
+		Page<PropModel> b = pr.findAll(PageRequest.of(pno, psize,ord));
+		return b.getContent();
+		
 	}
 }

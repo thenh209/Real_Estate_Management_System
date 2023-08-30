@@ -1,4 +1,4 @@
-package com.project.UserHistory.Model;
+package com.project.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

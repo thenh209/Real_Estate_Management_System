@@ -1,6 +1,6 @@
-package com.project.Property_Details.Controller;
+package com.project.Controllers;
 
-import java.util.List;
+import java.util.List; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.project.Property_Details.Model.PropModel;
-import com.project.Property_Details.Service.PropService;
-import com.project.UserHistory.Model.HistoryModel;
+import com.project.Models.PropModel;
+import com.project.Services.PropService;
 
 @RestController
 public class PropController {
@@ -23,13 +21,13 @@ public class PropController {
 	@Autowired
 	PropService ps;
 	
-	@PostMapping("addproperty")
+	@PostMapping("addProperty")
 	public PropModel add(@RequestBody  PropModel pm)
 	{
 		return ps.saveinfo(pm);
 	}
 	
-	@GetMapping("getproperty")
+	@GetMapping("getProperty")
 	public ResponseEntity<PropModel> show(@RequestParam int id) {
 	    PropModel prop = ps.getPropById(id);
 	    
@@ -39,25 +37,22 @@ public class PropController {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }
 	}
-	@GetMapping("getPropertyByUserId")
-    public ResponseEntity<List<PropModel>> showprop(@RequestParam int id) {
-        List<PropModel> list = ps.getPropertyByOwnerId(id);
-        
-        if (!list.isEmpty()) {
-            return new ResponseEntity<>(list, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-	@PutMapping("updateproperty")
+	
+	@PutMapping("updateProperty")
 	public String modifybyid(@RequestParam int id,@RequestBody PropModel um)
 	{
 		return ps.changeinfobyid(id,um);	
 	}
 	
-	@DeleteMapping("deleteproperty")
+	@DeleteMapping("deleteProperty")
 	public String deleteMyParamId(@RequestParam int id)
 	{
 		return (ps.deleteid(id)); 
+	}
+	
+	@GetMapping("sortPageForProperty")
+	public List<PropModel> sortPages(@RequestParam(value = "pNo") int pNo, @RequestParam(value = "pSize") int pSize,@RequestParam(value = "field") String field)
+	{
+		return ps.getPages(pNo, pSize, field);
 	}
 }

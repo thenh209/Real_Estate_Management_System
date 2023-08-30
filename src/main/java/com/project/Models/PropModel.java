@@ -1,4 +1,4 @@
-package com.project.Property_Details.Model;
+package com.project.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,9 +18,6 @@ public class PropModel {
     private double rentPrice;
     private double sellPrice;
     private double leasePrice;
-    private int ownerId;
-    private String ownerName;
-    private long ownerContact;
  
 
     public PropModel() {
@@ -30,7 +27,7 @@ public class PropModel {
 	
 
 	public PropModel(int propertyId, String propertyName, String location, double rentPrice, double sellPrice,
-			double leasePrice, int ownerId, String ownerName, long ownerContact) {
+			double leasePrice) {
 		super();
 		this.propertyId = propertyId;
 		this.propertyName = propertyName;
@@ -38,15 +35,6 @@ public class PropModel {
 		this.rentPrice = rentPrice;
 		this.sellPrice = sellPrice;
 		this.leasePrice = leasePrice;
-		this.ownerId = ownerId;
-		this.ownerName = ownerName;
-		this.ownerContact = ownerContact;
-	}
-	public int getOwnerId() {
-		return ownerId;
-	}
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
 	}
 	public int getPropertyId() {
 		return propertyId;
@@ -94,22 +82,6 @@ public class PropModel {
 
 	public void setLeasePrice(double leasePrice) {
 		this.leasePrice = leasePrice;
-	}
-
-	public String getOwnerName() {
-		return ownerName;
-	}
-
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
-
-	public long getOwnerContact() {
-		return ownerContact;
-	}
-
-	public void setOwnerContact(long ownerContact) {
-		this.ownerContact = ownerContact;
 	}
     
 }
